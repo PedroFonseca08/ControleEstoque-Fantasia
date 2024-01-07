@@ -9,7 +9,6 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import java.util.Objects;
 
 @Entity
 @Table(name = Historico.TABLE_NAME)

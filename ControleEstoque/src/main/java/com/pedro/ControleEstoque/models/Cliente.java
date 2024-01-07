@@ -20,15 +20,15 @@ public class Cliente {
     @Column(name = "id_cliente", unique = true)
     private Integer idCliente;
 
-    @Column(name = "cpf_cliente", unique = true, length = 11)
-    @NotBlank
-    @Size(min = 1, max = 11)
-    private String cpf_cliente;
-
     @Column(name = "nome_cliente", unique = true, length = 100)
     @NotBlank
     @Size(min = 1, max = 100)
     private String nomeCliente;
+
+    @Column(name = "cpf_cliente", unique = true, length = 11)
+    @NotBlank
+    @Size(min = 1, max = 11)
+    private String cpfCliente;
 
     @Column(name = "end_cliente", nullable = false, length = 150)
     @NotBlank
@@ -68,20 +68,20 @@ public class Cliente {
         this.idCliente = idCliente;
     }
 
-    public String getCpf_cliente() {
-        return this.cpf_cliente;
-    }
-
-    public void setCpf_cliente(String cpf_cliente) {
-        this.cpf_cliente = cpf_cliente;
-    }
-
     public String getNomeCliente() {
         return this.nomeCliente;
     }
 
     public void setNomeCliente(String nomeCliente) {
         this.nomeCliente = nomeCliente;
+    }
+
+    public String getCpfCliente() {
+        return this.cpfCliente;
+    }
+
+    public void setCpfCliente(String cpfCliente) {
+        this.cpfCliente = cpfCliente;
     }
 
     public String getEndCliente() {
@@ -130,50 +130,5 @@ public class Cliente {
 
     public void setObservacaoCliente(String observacaoCliente) {
         this.observacaoCliente = observacaoCliente;
-    }
-
-    public Cliente idCliente(Integer idCliente) {
-        setIdCliente(idCliente);
-        return this;
-    }
-
-    public Cliente cpf_cliente(String cpf_cliente) {
-        setCpf_cliente(cpf_cliente);
-        return this;
-    }
-
-    public Cliente nomeCliente(String nomeCliente) {
-        setNomeCliente(nomeCliente);
-        return this;
-    }
-
-    public Cliente endCliente(String endCliente) {
-        setEndCliente(endCliente);
-        return this;
-    }
-
-    public Cliente telCliente(String telCliente) {
-        setTelCliente(telCliente);
-        return this;
-    }
-
-    public Cliente cepCliente(String cepCliente) {
-        setCepCliente(cepCliente);
-        return this;
-    }
-
-    public Cliente dataNascCliente(String dataNascCliente) {
-        setDataNascCliente(dataNascCliente);
-        return this;
-    }
-
-    public Cliente rgCliente(String rgCliente) {
-        setRgCliente(rgCliente);
-        return this;
-    }
-
-    public Cliente observacaoCliente(String observacaoCliente) {
-        setObservacaoCliente(observacaoCliente);
-        return this;
-    }
+    }    
 }
