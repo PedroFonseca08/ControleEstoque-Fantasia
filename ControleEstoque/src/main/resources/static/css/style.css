@@ -1,0 +1,215 @@
+@font-face {
+    font-family: 'LemonRegular';
+    src: url('../icones/Lemon-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: #f5f07a; /* Cor de fundo amarela */
+    font-family: 'LemonRegular', sans-serif;
+}
+
+.logo-container {
+    position: absolute;
+    top: 20px; /* Ajuste conforme necessário */
+    left: 40px; /* Ajuste conforme necessário */
+}
+
+.logo {
+    max-width: 200px; /* Largura máxima da logo */
+    max-height: 200px; /* Altura máxima da logo */
+}
+
+.fundo-tabela {
+    position: absolute;
+    top: 10px; /* Ajuste conforme necessário */
+    left: 0;
+    width: 71%;
+    height: calc(100% - 30px); /* Ajuste conforme necessário */
+    background-color: #c745dc;
+    z-index: -1; /* Para posicionar atrás da tabela */
+    border-radius: 15px;
+}
+
+.client-name {
+    color: #fff; /* Cor branca */
+    border: 2px solid #5b0c68; /* Contorno roxo */
+    border-radius: 10px; /* Borda arredondada */
+    padding: 20px; /* Espaço interno */
+    background-color: #5b0c68; /* Preenchimento roxo */
+    display: inline-block; /* Para garantir que o contorno abranja apenas o texto */
+    width: 600px; /* Largura fixa do bloco */
+    height: 20px; /* Altura fixa do bloco */
+    font-size: 25px; /* Tamanho da fonte */
+    line-height: 5px; /* Alinhar o texto verticalmente ao centro */
+    overflow: hidden; /* Para garantir que o texto não ultrapasse as dimensões do bloco */
+    white-space: nowrap; /* Impede a quebra de linha do texto */
+    text-overflow: ellipsis; /* Adiciona "..." ao final do texto se ele for muito longo */
+    text-align: left;
+}
+
+.btn-add-cliente {
+    position: relative;
+    top: 160px; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+    display: inline-block;
+    background-color: rgba(128, 0, 128, 0.5); /* Purple transparent background */
+    color: black; /* Black text color */
+    border: none; /* Remove default button border */
+    transition: background-color 0.3s ease; /* Smooth transition for background color change */
+    font-size: 20px;
+    padding: 10px 15px;
+}
+
+.btn-add-cliente:hover,
+.btn-add-cliente:active,
+.btn-add-cliente:focus {
+    background-color: rgba(128, 0, 128, 0.7); /* Adjust the alpha value to control the hover, active, and focus transparency */
+    outline: none; /* Remove the default focus outline */
+}
+
+
+.table-container {
+    position: relative;
+    left: 250px; /* Adjust this value to control the left position */
+    top: 50px; /* Adjust this value to move it higher (negative values move it up) */
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffd700; /* Amarelo escuro */
+    padding: 100px;
+    padding-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Ajuste a largura conforme necessário */
+    max-height: 60vh; /* Ajuste a altura conforme necessário */
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 15px; /* Adicione bordas arredondadas */
+    opacity: 0; /* Comece com opacidade zero para a transição */
+    transition: opacity 0.5s ease; /* Adicione uma transição suave para a opacidade */
+}
+
+.modal.active {
+    display: block;
+    opacity: 1; /* Quando ativo, defina a opacidade para 1 */
+}
+
+.modalFantasia {
+    display: none;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffd700; /* Amarelo escuro */
+    padding: 100px;
+    padding-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 90%; /* Ajuste a largura conforme necessário */
+    max-height: 60vh; /* Ajuste a altura conforme necessário */
+    overflow: auto;
+    z-index: 1;
+    border-radius: 15px; /* Adicione bordas arredondadas */
+    opacity: 0; /* Comece com opacidade zero para a transição */
+    transition: opacity 0.5s ease; /* Adicione uma transição suave para a opacidade */
+}
+
+.modalFantasia.active {
+    display: block;
+    opacity: 1; /* Quando ativo, defina a opacidade para 1 */
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.modal-btn {
+    padding: 10px 20px;
+    background-color: #5b0c68;
+    color: #f0eb75;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-close {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: #5b0c68; /* Cor roxa */
+    border: none;
+    opacity: 1; /* Opacidade total */
+    color: #f0eb75; /* Cor do texto */
+}
+
+.info-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+.info-button img {
+    width: 45px; /* Ajuste o tamanho da imagem conforme necessário */
+    height: 45px;
+}
+
+ .input-like {
+     text-align: left;
+     display: inline-block;
+     padding: 0.375rem 0.75rem;
+     font-size: 1rem;
+     line-height: 1.5;
+     color: #495057;
+     background-color: #fff;
+     background-clip: padding-box;
+     border: 1px solid #ced4da;
+     border-radius: 0.25rem;
+     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+ }
+
+.input-like-checkbox {
+    text-align: left;
+    display: inline-block;
+    padding: 1.1rem 1.1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.search-input {
+    position: absolute;
+    top: 20px; /* Ajuste conforme necessário */
+    left: 500px; /* Ajuste conforme necessário */
+    width: 500px;
+    background-color: #c745dc;
+    font-size: 20px;
+    padding: 13px;
+    border: 2px solid #5b0c68; /* Cor da borda roxa */
+    border-radius: 15px; /* Borda circular */
+    outline: none; /* Remove a borda ao clicar */
+    color: #fff;
+}
+
+.search-input::placeholder {
+    color: #fff; /* Cor do texto de placeholder roxa */
+}

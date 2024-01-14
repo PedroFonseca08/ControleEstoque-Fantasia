@@ -3,16 +3,16 @@ package com.pedro.ControleEstoque.models;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class HistoricoId implements Serializable{
+public class FantasiaId implements Serializable{
 
     private Integer idFantasia;
     private Integer idCliente;
 
 
-    public HistoricoId() {
+    public FantasiaId() {
     }
 
-    public HistoricoId(Integer idFantasia, Integer idCliente) {
+    public FantasiaId(Integer idFantasia, Integer idCliente) {
         this.idFantasia = idFantasia;
         this.idCliente = idCliente;
     }
@@ -33,12 +33,12 @@ public class HistoricoId implements Serializable{
         this.idCliente = idCliente;
     }
 
-    public HistoricoId idFantasia(Integer idFantasia) {
+    public FantasiaId idFantasia(Integer idFantasia) {
         setIdFantasia(idFantasia);
         return this;
     }
 
-    public HistoricoId idCliente(Integer idCliente) {
+    public FantasiaId idCliente(Integer idCliente) {
         setIdCliente(idCliente);
         return this;
     }
@@ -47,10 +47,10 @@ public class HistoricoId implements Serializable{
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof HistoricoId)) {
+        if (!(o instanceof FantasiaId)) {
             return false;
         }
-        HistoricoId historicoId = (HistoricoId) o;
+        FantasiaId historicoId = (FantasiaId) o;
         return Objects.equals(idFantasia, historicoId.idFantasia) && Objects.equals(idCliente, historicoId.idCliente);
     }
 

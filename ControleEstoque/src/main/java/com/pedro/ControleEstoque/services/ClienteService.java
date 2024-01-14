@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.pedro.ControleEstoque.models.Cliente;
 import com.pedro.ControleEstoque.repositories.ClienteRepositorio;
-import com.pedro.ControleEstoque.repositories.HistoricoRepositorio;
+import com.pedro.ControleEstoque.repositories.FantasiaRepositorio;
 
 @Service
 public class ClienteService {
@@ -17,7 +17,7 @@ public class ClienteService {
     private ClienteRepositorio clienteRepositorio;
 
     @Autowired
-    private HistoricoRepositorio historicoRepositorio;
+    private FantasiaRepositorio fantasiaRepositorio;
 
 
     public Cliente findClienteById(Integer id){
@@ -28,16 +28,18 @@ public class ClienteService {
             "Cliente não encontrado! ID: " + id + " não encontrado"));
     }
 
-    public List<Cliente> findAllClientes(){
-        List<Cliente> listaClientes = this.clienteRepositorio.findAll();
+    public List<Cliente> findAllClientesDevendo(){
 
-        return listaClientes;
+        return this.clienteRepositorio.findAllClientesDevendo();
     }
 
-    public Cliente createCliente (Cliente cliente){
+    public List<Cliente> findAllClientesNaoDevendo(){
+
+        return this.clienteRepositorio.findAllClientesNaoDevendo();
+    }
+    public Cliente createCliente(Cliente cliente) {
         cliente.setIdCliente(null);
         cliente = this.clienteRepositorio.save(cliente);
-
         return cliente;
     }
 
@@ -55,5 +57,15 @@ public class ClienteService {
         } catch (Exception e) {
             throw new RuntimeException("Não foi possível excluir cliente");
         }
+    }
+
+    public boolean verificaNomeECpf(String nome, String cpf) {
+        Optional<Cliente> cliente = clienteRepositorio.findByNomeAndCpf(nome, cpf);
+        return cliente.isPresent();
+    }
+
+    public boolean verificaNomeECpfEditar(String nome, String cpf, Integer idCliente) {
+        Optional<Cliente> cliente = clienteRepositorio.findByNomeAndCpfEditar(nome, cpf, idCliente);
+        return cliente.isPresent();
     }
 }
