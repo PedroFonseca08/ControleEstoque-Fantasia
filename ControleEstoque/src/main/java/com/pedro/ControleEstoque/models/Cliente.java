@@ -25,9 +25,9 @@ public class Cliente {
     @Size(min = 1, max = 100)
     private String nomeCliente;
 
-    @Column(name = "cpf_cliente", unique = true, length = 11)
+    @Column(name = "cpf_cliente", unique = true, length = 14)
     @NotBlank
-    @Size(min = 1, max = 11)
+    @Size(min = 1, max = 14)
     private String cpfCliente;
 
     @Column(name = "end_cliente", nullable = false, length = 150)
@@ -35,21 +35,21 @@ public class Cliente {
     @Size(min = 1, max = 150)
     private String endCliente;
 
-    @Column(name = "tel_cliente", nullable = false, length = 11)
+    @Column(name = "tel_cliente", nullable = false, length = 14)
     @NotBlank
-    @Size(min = 1, max = 11)
+    @Size(min = 1, max = 14)
     private String telCliente;
 
-    @Column(name = "cep_cliente", nullable = true, length = 8)
-    @Size(min = 0, max = 8)
+    @Column(name = "cep_cliente", nullable = true, length = 9)
+    @Size(min = 0, max = 9)
     private String cepCliente;
 
     @Column(name = "data_nasc_cliente", nullable = true, length = 10)
     @Size(min = 0, max = 10)
     private String dataNascCliente;
 
-    @Column(name = "rg_cliente", nullable = true, length = 15)
-    @Size(min = 0, max = 15)
+    @Column(name = "rg_cliente", nullable = true, length = 20)
+    @Size(min = 0, max = 20)
     private String rgCliente;
 
     @Column(name = "observacao_cliente", nullable = true, length = 200)

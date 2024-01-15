@@ -1,5 +1,8 @@
 package com.pedro.ControleEstoque.services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +31,11 @@ public class ClienteService {
             "Cliente não encontrado! ID: " + id + " não encontrado"));
     }
 
+    public List<Cliente> findAllClientes(){
+
+        return this.clienteRepositorio.findAllClientes();
+    }
+
     public List<Cliente> findAllClientesDevendo(){
 
         return this.clienteRepositorio.findAllClientesDevendo();
@@ -39,9 +47,26 @@ public class ClienteService {
     }
     public Cliente createCliente(Cliente cliente) {
         cliente.setIdCliente(null);
+
+        // Tratamento para a data de nascimento
+        String dataNascCliente = cliente.getDataNascCliente();
+        if (dataNascCliente != null) {
+            dataNascCliente = dataNascCliente.replace(",", "");
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                Date parsedDate = inputFormat.parse(dataNascCliente);
+                String formattedDate = outputFormat.format(parsedDate);
+                cliente.setDataNascCliente(formattedDate);
+            } catch (ParseException e) {
+                e.printStackTrace(); // Trate a exceção de análise aqui, se necessário
+            }
+        }
+
         cliente = this.clienteRepositorio.save(cliente);
         return cliente;
     }
+
 
     public Cliente updateCliente(Cliente cliente){
         Cliente novoCliente = findClienteById(cliente.getIdCliente());

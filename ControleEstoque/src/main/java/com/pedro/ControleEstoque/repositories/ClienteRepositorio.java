@@ -18,6 +18,9 @@ public interface ClienteRepositorio extends JpaRepository<Cliente, Integer> {
     @Query("SELECT c FROM Cliente c WHERE c.idCliente NOT IN (SELECT c.idCliente FROM Cliente c JOIN Fantasia f ON c.idCliente = f.idCliente WHERE f.baixaFantasia IS NULL GROUP BY c.idCliente) ORDER BY c.nomeCliente")
     List<Cliente> findAllClientesNaoDevendo();
 
+    @Query("SELECT c FROM Cliente c ORDER BY c.nomeCliente")
+    List<Cliente> findAllClientes();
+
     @Query("SELECT c FROM Cliente c WHERE c.nomeCliente = :nomeCliente OR c.cpfCliente = :cpfCliente")
     Optional<Cliente> findByNomeAndCpf(@Param("nomeCliente") String nomeCliente, @Param("cpfCliente") String cpfCliente);
 

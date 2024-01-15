@@ -23,8 +23,6 @@
 
 
 <input type="text" id="searchInput" class="search-input" oninput="searchClients()" placeholder="Buscar clientes...">
-<ul id="clientList" class="client-list"></ul>
-
 
 
 <div class="container text-center table-container">
@@ -71,15 +69,15 @@
             <form id="clienteForm" class="row" th:action="@{/create}" method="post" th:object="${cliente}">
                 <div class="col-12 mb-3 d-flex align-items-start">
                     <label for="nome" class="form-label me-3">Nome:</label>
-                    <input type="text" class="form-control" id="nome" placeholder="Digite o nome" th:field="*{nomeCliente}" required>
+                    <input type="text" class="form-control" id="nome" placeholder="Digite o nome" th:field="*{nomeCliente}" required onblur="validateNome('nome')">
                 </div>
                 <div class="col-md-3 mb-3 d-flex align-items-start">
                     <label for="cpf" class="form-label me-1">CPF:</label>
-                    <input type="text" class="form-control" id="cpf" placeholder="Digite o CPF" th:field="*{cpfCliente}" required>
+                    <input type="text" class="form-control" id="cpf" placeholder="Digite o CPF" th:field="*{cpfCliente}" required onblur="validateCPF('cpf')">
                 </div>
                 <div class="col-md-3 mb-3 d-flex align-items-start">
                     <label for="rg" class="form-label me-1">RG:</label>
-                    <input type="text" class="form-control" id="rg" placeholder="Digite o RG" th:field="*{rgCliente}">
+                    <input type="text" class="form-control" id="rg" placeholder="Digite o RG" th:field="*{rgCliente}" onblur="validateRG('rg')">
                 </div>
                 <div class="col-md-3 mb-3 d-flex align-items-start">
                     <label for="dataNasc" class="form-label me-1">Data Nasc:</label>
@@ -87,19 +85,19 @@
                 </div>
                 <div class="col-md-3 mb-3 d-flex align-items-start">
                     <label for="cep" class="form-label me-1">CEP:</label>
-                    <input type="text" class="form-control" id="cep" placeholder="Digite o CEP" th:field="*{cepCliente}">
+                    <input type="text" class="form-control" id="cep" placeholder="Digite o CEP" th:field="*{cepCliente}" onblur="validateCep('cep')">
                 </div>
                 <div class="col-md-8 mb-3 d-flex align-items-start">
                     <label for="end" class="form-label me-1">Endereço:</label>
-                    <input type="text" class="form-control" id="end" placeholder="Digite o Endereço" th:field="*{endCliente}" required>
+                    <input type="text" class="form-control" id="end" placeholder="Digite o Endereço" th:field="*{endCliente}" required onblur="validateEndereco('end')">
                 </div>
                 <div class="col-md-4 mb-3 d-flex align-items-start">
                     <label for="tel" class="form-label me-1">Telefone:</label>
-                    <input type="text" class="form-control" id="tel" placeholder="Digite o telefone" th:field="*{telCliente}" required>
+                    <input type="text" class="form-control" id="tel" placeholder="Digite o telefone" th:field="*{telCliente}" required onblur="validateTel('tel')">
                 </div>
                 <div class="col-md-12 mb-3 d-flex align-items-start">
                     <label for="obs" class="form-label me-1">Observação:</label>
-                    <input type="text" class="form-control" id="obs" placeholder="Digite a observação" th:field="*{observacaoCliente}">
+                    <input type="text" class="form-control" id="obs" placeholder="Digite a observação" th:field="*{observacaoCliente}" onblur="validateObs('obs')">
                 </div>
                 <div class="col-12">
                     <button type="button" onclick="validateAndSubmit()" class="btn btn-secondary modal-btn">Confirmar</button>
@@ -165,12 +163,12 @@
         <form id="fantasiaForm" class="row" th:action="@{/createFantasia}" method="post" th:object="${fantasia}">
             <div class="col-12 mb-3 d-flex align-items-start">
                 <label for="nomeFantasia" class="form-label me-3">Fantasia:</label>
-                <input type="text" class="form-control" id="nomeFantasia" placeholder="Digite o nome da Fantasia" th:field="*{nomeFantasia}" required>
+                <input type="text" class="form-control" id="nomeFantasia" placeholder="Digite o nome da Fantasia" th:field="*{nomeFantasia}" required onblur="validateFantasia('nomeFantasia')">
             </div>
 
             <div class="col-md-12 mb-3 d-flex align-items-start">
                 <label for="observacaoFantasia" class="form-label me-1">Observação:</label>
-                <input type="text" class="form-control" id="observacaoFantasia" placeholder="Digite a observação" th:field="*{observacaoFantasia}">
+                <input type="text" class="form-control" id="observacaoFantasia" placeholder="Digite a observação" th:field="*{observacaoFantasia}" onblur="validateObs('observacaoFantasia')">
             </div>
 
             <div class="col-md-6 mb-3 d-flex align-items-start mx-auto text-center">
@@ -205,7 +203,7 @@
         <div id="fantasiasContainer"></div>
         <tbody>
         <div class="col-12">
-            <button type="button" onclick="closeModalFantasiasCliente()" class="btn btn-secondary modal-btn">Confirmar</button>
+            <button type="button" onclick="closeModalFantasiasClienteParaFechar()" class="btn btn-secondary modal-btn">Confirmar</button>
         </div>
     </div>
 
@@ -218,15 +216,15 @@
         <form id="clienteFormEditar" class="row" th:action="@{/update}" method="post" th:object="${cliente}">
             <div class="col-12 mb-3 d-flex align-items-start">
                 <label for="nome-edit" class="form-label me-3">Nome:</label>
-                <input type="text" class="form-control" id="nome-edit" th:field="*{nomeCliente}" required>
+                <input type="text" class="form-control" id="nome-edit" th:field="*{nomeCliente}" onblur="validateNome('nome-edit')">
             </div>
             <div class="col-md-3 mb-3 d-flex align-items-start">
                 <label for="cpf-edit" class="form-label me-1">CPF:</label>
-                <input type="text" class="form-control" id="cpf-edit" th:field="*{cpfCliente}" required>
+                <input type="text" class="form-control" id="cpf-edit" th:field="*{cpfCliente}" onblur="validateCPF('cpf-edit')">
             </div>
             <div class="col-md-3 mb-3 d-flex align-items-start">
                 <label for="rg-edit" class="form-label me-1">RG:</label>
-                <input type="text" class="form-control" id="rg-edit" th:field="*{rgCliente}">
+                <input type="text" class="form-control" id="rg-edit" th:field="*{rgCliente}" onblur="validateRG('rg-edit')">
             </div>
             <div class="col-md-3 mb-3 d-flex align-items-start">
                 <label for="dataNasc-edit" class="form-label me-1">Data Nasc:</label>
@@ -234,19 +232,19 @@
             </div>
             <div class="col-md-3 mb-3 d-flex align-items-start">
                 <label for="cep-edit" class="form-label me-1">CEP:</label>
-                <input type="text" class="form-control" id="cep-edit" th:field="*{cepCliente}">
+                <input type="text" class="form-control" id="cep-edit" th:field="*{cepCliente}" onblur="validateCep('cep-edit')">
             </div>
             <div class="col-md-8 mb-3 d-flex align-items-start">
                 <label for="end-edit" class="form-label me-1">Endereço:</label>
-                <input type="text" class="form-control" id="end-edit" th:field="*{endCliente}" required>
+                <input type="text" class="form-control" id="end-edit" th:field="*{endCliente}" onblur="validateEndereco('end-edit')">
             </div>
             <div class="col-md-4 mb-3 d-flex align-items-start">
                 <label for="tel-edit" class="form-label me-1">Telefone:</label>
-                <input type="text" class="form-control" id="tel-edit" th:field="*{telCliente}" required>
+                <input type="text" class="form-control" id="tel-edit" th:field="*{telCliente}" onblur="validateTel('tel-edit')">
             </div>
             <div class="col-md-12 mb-3 d-flex align-items-start">
                 <label for="obs-edit" class="form-label me-1">Observação:</label>
-                <input type="text" class="form-control" id="obs-edit" th:field="*{observacaoCliente}">
+                <input type="text" class="form-control" id="obs-edit" th:field="*{observacaoCliente}" onblur="validateObs('obs-edit')">
             </div>
             <div class="col-12">
                 <button type="button" onclick="validateAndSubmitEditar()" class="btn btn-secondary modal-btn">Confirmar</button>

@@ -24,7 +24,20 @@ function closeModalEditarCliente() {
     document.getElementById('modalEditarCliente').style.display = 'none';
     document.getElementById('overlay').style.display = 'none';
 
-    window.location.reload();
+    // Faça uma solicitação AJAX para atualizar o valor no banco de dados
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // Sucesso ao atualizar no banco de dados
+                console.log('Valor atualizado com sucesso.');
+            } else {
+            }
+        }
+    };
+
+    xhr.open('GET', '/principal', true);
+    xhr.send();
 }
 function openModalInfoCliente(clienteId) {
     // Fazer uma solicitação AJAX para obter as informações do cliente
@@ -158,12 +171,41 @@ function closeModalFantasiasCliente() {
     var dataCompraFantasiaInput = document.getElementById('dataCompraFantasia');
     var dataInicioFantasiaInput = document.getElementById('dataInicioFantasia');
     var dataFimFantasiaInput = document.getElementById('dataFimFantasia');
+
     nomeFantasia.value = null;
     obsFantasia.value = null;
     tipoFantasiaSelect.value = null;
     dataCompraFantasiaInput.value = null;
     dataInicioFantasiaInput.value = null;
     dataFimFantasiaInput.value = null;
+
+    // Ocultar campos de data
+    document.getElementById('dataCompraFantasia-label').style.display = 'none';
+    document.getElementById('dataCompraFantasia').style.display = 'none';
+    document.getElementById('dataInicioFantasia-label').style.display = 'none';
+    document.getElementById('dataInicioFantasia').style.display = 'none';
+    document.getElementById('dataFimFantasia-label').style.display = 'none';
+    document.getElementById('dataFimFantasia').style.display = 'none';
+}
+
+
+function closeModalFantasiasClienteParaFechar() {
+    document.getElementById('modalFantasiasCliente').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+
+    var nomeFantasia = document.getElementById('nomeFantasia');
+    var obsFantasia = document.getElementById('observacaoFantasia');
+    var tipoFantasiaSelect = document.getElementById('tipoFantasia');
+    var dataCompraFantasiaInput = document.getElementById('dataCompraFantasia');
+    var dataInicioFantasiaInput = document.getElementById('dataInicioFantasia');
+    var dataFimFantasiaInput = document.getElementById('dataFimFantasia');
+    nomeFantasia.value = null;
+    obsFantasia.value = null;
+    tipoFantasiaSelect.value = null;
+    dataCompraFantasiaInput.value = null;
+    dataInicioFantasiaInput.value = null;
+    dataFimFantasiaInput.value = null;
+
     window.location.reload();
 }
 
@@ -437,3 +479,206 @@ function validateAndSubmitEditar(){
     xhr.open('GET', url, true);
     xhr.send();
 }
+
+function removeAccents(str) {
+    // Função para remover acentos de uma string
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+function searchClients() {
+    // Obtenha o valor digitado no campo de busca
+    var input = document.getElementById('searchInput');
+    var filter = removeAccents(input.value.toUpperCase());
+
+    // Obtenha a lista de clientes
+    var table = document.querySelector('.table tbody');
+    var rows = table.getElementsByTagName('tr');
+
+    // Itere sobre as linhas da tabela e oculte aquelas que não correspondem à busca
+    for (var i = 0; i < rows.length; i++) {
+        var clientName = rows[i].querySelector('.client-name');
+        var txtValue = removeAccents(clientName.textContent || clientName.innerText);
+
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            rows[i].style.display = '';
+        } else {
+            rows[i].style.display = 'none';
+        }
+    }
+}
+
+function validateCPF(inputId) {
+    var cpfInput = document.getElementById(inputId);
+    var cpfValue = cpfInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+    if (cpfValue.length !== 11 || isNaN(cpfValue)) {
+        alert('CPF deve conter exatamente 11 dígitos numéricos.');
+        cpfInput.value = ''; // Limpa o campo
+    }
+}
+
+function validateRG(inputId) {
+    var rgInput = document.getElementById(inputId);
+
+    if (rgInput.value.length > 20) {
+        rgInput.value = '';
+        alert('O RG deve ter 20 dígitos no máximo.');
+    }
+}
+
+function validateTel(inputId) {
+    var telInput = document.getElementById(inputId);
+    var telValue = telInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+    if (telValue.length !== 11) {
+        alert('Por favor, insira um número de telefone válido com 11 caracteres.');
+        telInput.value = '';
+    }
+}
+
+function validateCep(inputId) {
+    var cepInput = document.getElementById(inputId);
+    var cepValue = cepInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+    // Se o comprimento do CEP for diferente de 9, limpe o campo
+    if (cepValue.length !== 8) {
+        cepInput.value = '';
+        alert('O CEP deve ter 8 dígitos.');
+    }
+}
+
+function validateEndereco(inputId) {
+    var endInput = document.getElementById(inputId);
+
+    if (endInput.value.length > 150) {
+        endInput.value = '';
+        alert('O endereço deve ter 150 caracteres no máximo.');
+    }
+}
+
+function validateObs(inputId) {
+    var obsInput = document.getElementById(inputId);
+
+    if (obsInput.value.length > 200) {
+        obsInput.value = '';
+        alert('A observação deve ter 200 caracteres no máximo.');
+    }
+}
+
+function validateNome(inputId) {
+    var nomeInput = document.getElementById(inputId);
+
+    if (nomeInput.value.length > 100) {
+        nomeInput.value = '';
+        alert('O nome deve ter 100 caracteres no máximo.');
+    }
+}
+
+function validateFantasia(inputId) {
+    var nomeInput = document.getElementById(inputId);
+
+    if (nomeInput.value.length > 60) {
+        nomeInput.value = '';
+        alert('O nome da fantasia deve ter 60 caracteres no máximo.');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Função para formatar o CPF
+    function formatCPF(cpfValue) {
+        if (cpfValue.length <= 5) {
+            // Formata os primeiros 3 dígitos
+            return cpfValue.replace(/(\d{3})/, '$1.');
+        } else if (cpfValue.length <= 8) {
+            // Formata os primeiros 6 dígitos em grupos de 3
+            return cpfValue.replace(/(\d{3})(\d{3})/, '$1.$2.');
+        } else if (cpfValue.length <= 10) {
+            // Formata os primeiros 9 dígitos em grupos de 3
+            return cpfValue.replace(/(\d{3})(\d{3})(\d{3})/, '$1.$2.$3-');
+        } else if (cpfValue.length <= 11) {
+            // Formata os 11 dígitos completos
+            return cpfValue.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+        } else {
+            // Limita a entrada a 11 dígitos mantendo a formatação correta
+            return cpfValue.substring(0, 3) + '.' + cpfValue.substring(3, 6) + '.' + cpfValue.substring(6, 9) + '-' + cpfValue.substring(9, 11);
+        }
+    }
+
+    // Aplica a formatação ao campo CPF
+    var cpfInput = document.getElementById('cpf');
+    cpfInput.addEventListener('input', function () {
+        cpfInput.value = formatCPF(cpfInput.value.replace(/\D/g, ''));
+    });
+
+    // Aplica a formatação ao campo de edição de CPF (cpf-edit)
+    var cpfEditInput = document.getElementById('cpf-edit');
+    cpfEditInput.addEventListener('input', function () {
+        cpfEditInput.value = formatCPF(cpfEditInput.value.replace(/\D/g, ''));
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Função para formatar o CEP
+    function formatCEP(cepValue) {
+        if (cepValue.length <= 4) {
+            // Formata os primeiros 5 dígitos
+            return cepValue.replace(/(\d{5})/, '$1');
+        } else if (cepValue.length <= 7) {
+            // Formata os primeiros 5 dígitos
+            return cepValue.replace(/(\d{5})/, '$1-');
+        } else {
+            // Adiciona o hífen após os 5 primeiros dígitos
+            return cepValue.replace(/(\d{5})(\d{3})/, '$1-$2').substring(0, 9);
+        }
+    }
+
+    // Aplica a formatação ao campo CEP
+    var cepInput = document.getElementById('cep');
+    cepInput.addEventListener('input', function () {
+        cepInput.value = formatCEP(cepInput.value.replace(/\D/g, ''));
+    });
+
+    // Aplica a formatação ao campo de edição de CEP (cep-edit)
+    var cepEditInput = document.getElementById('cep-edit');
+    cepEditInput.addEventListener('input', function () {
+        cepEditInput.value = formatCEP(cepEditInput.value.replace(/\D/g, ''));
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    var telInput = document.getElementById('tel');
+    var telEditInput = document.getElementById('tel-edit');
+    var maxChars = 14; // Defina o número máximo de caracteres
+
+    // Função para formatar o telefone
+    function formatTel(telValue) {
+        if (telValue.length >= 2) {
+            // Adiciona os parênteses após os dois primeiros dígitos
+            telValue = '(' + telValue.substring(0, 2) + ')' + telValue.substring(2);
+        }
+
+        if (telValue.length >= 9) {
+            // Adiciona o hífen após os sete primeiros dígitos
+            telValue = telValue.substring(0, 9) + '-' + telValue.substring(9);
+        }
+
+        // Limita o número máximo de caracteres
+        if (telValue.length > maxChars) {
+            telValue = telValue.substring(0, maxChars);
+        }
+
+        return telValue;
+    }
+
+    // Aplica a formatação ao campo telefone
+    telInput.addEventListener('input', function () {
+        telInput.value = formatTel(telInput.value.replace(/\D/g, ''));
+    });
+
+    // Aplica a formatação ao campo de edição de telefone (tel-edit)
+    telEditInput.addEventListener('input', function () {
+        telEditInput.value = formatTel(telEditInput.value.replace(/\D/g, ''));
+    });
+});

@@ -17,6 +17,9 @@ public interface FantasiaRepositorio extends JpaRepository<Fantasia, String>{
     @Query("SELECT f FROM Fantasia f WHERE f.idCliente = :idCliente ORDER BY f.baixaFantasia")
     List<Fantasia> findFantasiaByIdCliente(@Param("idCliente") Integer idCliente);
 
+    @Query("SELECT f FROM Fantasia f ORDER BY f.idCliente")
+    List<Fantasia> findAllFantasias();
+
     @Query("SELECT f FROM Fantasia f WHERE f.idFantasia = :idFantasia")
     Optional<Fantasia> findByIdFantasia(@Param("idFantasia") Integer idFantasia);
 
