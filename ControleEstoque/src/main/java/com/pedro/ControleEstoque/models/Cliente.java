@@ -25,9 +25,9 @@ public class Cliente {
     @Size(min = 1, max = 100)
     private String nomeCliente;
 
-    @Column(name = "cpf_cliente", unique = true, length = 14)
+    @Column(name = "cpf_cliente", unique = true, length = 18)
     @NotBlank
-    @Size(min = 1, max = 14)
+    @Size(min = 1, max = 18)
     private String cpfCliente;
 
     @Column(name = "end_cliente", nullable = false, length = 150)

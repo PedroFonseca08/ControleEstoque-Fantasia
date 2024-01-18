@@ -511,8 +511,8 @@ function validateCPF(inputId) {
     var cpfInput = document.getElementById(inputId);
     var cpfValue = cpfInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
 
-    if (cpfValue.length !== 11 || isNaN(cpfValue)) {
-        alert('CPF deve conter exatamente 11 dígitos numéricos.');
+    if (cpfValue.length !== 11 && cpfValue.length !== 14 || isNaN(cpfValue)) {
+        alert('CPF deve conter 11 dígitos numéricos ou CNPJ deve conter 14 dígitos numéricos.');
         cpfInput.value = ''; // Limpa o campo
     }
 }
@@ -598,10 +598,14 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (cpfValue.length <= 11) {
             // Formata os 11 dígitos completos
             return cpfValue.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
-        } else {
+        } else if (cpfValue.length <= 13){
             // Limita a entrada a 11 dígitos mantendo a formatação correta
-            return cpfValue.substring(0, 3) + '.' + cpfValue.substring(3, 6) + '.' + cpfValue.substring(6, 9) + '-' + cpfValue.substring(9, 11);
+            return cpfValue.replace(/(\d{2})(\d{3})(\d{3})(\d{4})/, '$1.$2.$3/$4-');
         }
+        else if (cpfValue.length <= 14){
+            return cpfValue.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+        }
+        return cpfValue.substring(0, 2) + '.' + cpfValue.substring(2, 5) + '.' + cpfValue.substring(5, 8) + '/' + cpfValue.substring(8, 12) + '-' + cpfValue.substring(12, 14);
     }
 
     // Aplica a formatação ao campo CPF

@@ -12,7 +12,7 @@ public class ControleEstoqueApplication {
 
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(ControleEstoqueApplication.class, args);
-		openHomePage();
+		//openHomePage();
 	}
 
 	private static void openHomePage() throws IOException {

@@ -72,11 +72,11 @@
                     <input type="text" class="form-control" id="nome" placeholder="Digite o nome" th:field="*{nomeCliente}" required onblur="validateNome('nome')">
                 </div>
                 <div class="col-md-3 mb-3 d-flex align-items-start">
-                    <label for="cpf" class="form-label me-1">CPF:</label>
+                    <label for="cpf" class="form-label me-1">CPF/<br>CNPJ:</label>
                     <input type="text" class="form-control" id="cpf" placeholder="Digite o CPF" th:field="*{cpfCliente}" required onblur="validateCPF('cpf')">
                 </div>
                 <div class="col-md-3 mb-3 d-flex align-items-start">
-                    <label for="rg" class="form-label me-1">RG:</label>
+                    <label for="rg" class="form-label me-1">RG/<br>IE:</label>
                     <input type="text" class="form-control" id="rg" placeholder="Digite o RG" th:field="*{rgCliente}" onblur="validateRG('rg')">
                 </div>
                 <div class="col-md-3 mb-3 d-flex align-items-start">
@@ -117,11 +117,11 @@
                 <span id="info-nome" class="input-like" style="width: 1000px;"></span>
             </div>
             <div class="col-md-3 mb-3">
-                <label for="cpf" class="form-label me-1">CPF:</label>
+                <label for="cpf" class="form-label me-1">CPF/<br>CNPJ:</label>
                 <span id="info-cpf" class="input-like"></span>
             </div>
             <div class="col-md-3 mb-3">
-                <label for="rg" class="form-label me-1">RG:</label>
+                <label for="rg" class="form-label me-1">RG/<br>IE:</label>
                 <span id="info-rg" class="input-like"></span>
             </div>
             <div class="col-md-3 mb-3">
@@ -219,11 +219,11 @@
                 <input type="text" class="form-control" id="nome-edit" th:field="*{nomeCliente}" onblur="validateNome('nome-edit')">
             </div>
             <div class="col-md-3 mb-3 d-flex align-items-start">
-                <label for="cpf-edit" class="form-label me-1">CPF:</label>
+                <label for="cpf-edit" class="form-label me-1">CPF/<br>CNPJ:</label>
                 <input type="text" class="form-control" id="cpf-edit" th:field="*{cpfCliente}" onblur="validateCPF('cpf-edit')">
             </div>
             <div class="col-md-3 mb-3 d-flex align-items-start">
-                <label for="rg-edit" class="form-label me-1">RG:</label>
+                <label for="rg-edit" class="form-label me-1">RG/<br>IE:</label>
                 <input type="text" class="form-control" id="rg-edit" th:field="*{rgCliente}" onblur="validateRG('rg-edit')">
             </div>
             <div class="col-md-3 mb-3 d-flex align-items-start">
