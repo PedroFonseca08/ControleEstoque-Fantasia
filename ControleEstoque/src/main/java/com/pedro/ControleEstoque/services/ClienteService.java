@@ -50,7 +50,7 @@ public class ClienteService {
 
         // Tratamento para a data de nascimento
         String dataNascCliente = cliente.getDataNascCliente();
-        if (dataNascCliente != null) {
+        if ((dataNascCliente != null) && (!dataNascCliente.equals(""))){
             dataNascCliente = dataNascCliente.replace(",", "");
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
