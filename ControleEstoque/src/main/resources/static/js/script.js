@@ -224,12 +224,34 @@ function validateAndSubmit() {
     }
 }
 
+function openModalFantasiaClienteApos() {
+    var xhr = new XMLHttpRequest();
+
+    // Defina a função de retorno de chamada
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // Sucesso: Manipular a resposta (exibir no modal, etc.)
+                closeModalCliente();
+                openModalFantasiaCliente(xhr.responseText);
+            }
+        }
+    };
+
+    // Obtenha os dados do formulário
+    var formData = new FormData(document.getElementById('clienteForm'));
+
+    // Configure a requisição
+    xhr.open('POST', '/create', true);
+    xhr.send(formData);
+}
+
 function checkClienteExistence(nome, cpf) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                document.getElementById('clienteForm').submit();
+                openModalFantasiaClienteApos();
             } else {
                 alert('Cliente já existe com esse nome ou CPF');
             }
@@ -350,7 +372,6 @@ function validateAndSubmitFantasia(clienteId) {
     // Configure a requisição
     xhr.open('POST', '/createFantasia', true);
     xhr.send(formData);
-    //document.getElementById('fantasiaForm').submit();
 }
 
 function updateFantasiasContainer(clienteId) {

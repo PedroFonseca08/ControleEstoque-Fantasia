@@ -99,10 +99,10 @@ public class ClienteController {
     }
 
     @PostMapping("/create")
-    public String criarUsuario(@ModelAttribute @Valid Cliente objCliente) {
-        this.clienteService.createCliente(objCliente);
+    public ResponseEntity<Integer> criarUsuario(@ModelAttribute @Valid Cliente objCliente) {
+        Cliente clienteNovo = this.clienteService.createCliente(objCliente);
 
-        return "redirect:/principal";
+        return ResponseEntity.ok().body(clienteNovo.getIdCliente());
     }
 
     @PostMapping("/update")
